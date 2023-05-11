@@ -15,26 +15,29 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    @Column(name = "city_id")
-    private int cityId;
 
-    public Employee() {
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 
-    }
+    private City city ;
 
-    public Employee(String firstName, String lastName, String gender, int age, int cityId) {
+    public Employee() {}
+
+    public Employee(String firstName, String lastName, String gender, int age, City city) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
-        this.cityId = cityId;
+        this.city = city;
     }
 
-    public Employee(String firstName, String lastName, String gender, int age) {
+    public Employee(int id, String firstName, String lastName, String gender, int age, City city) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
+        this.city = city;
     }
 
     public int getId() {
@@ -77,13 +80,14 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCityId() {
-        return cityId;
+    public City getCityId() {
+        return city;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
+    public void setCityId(City city) {
+        this.city = city;
     }
+
 
     @Override
     public String toString() {
@@ -93,6 +97,6 @@ public class Employee {
                 ", Фамилия: " + lastName + '\'' +
                 ", Пол сотрудника: " + gender + '\'' +
                 ", Возраст сотрудника: " + age +
-                ", Город сотрудника: " + cityId;
+                ", Город сотрудника: " + city;
     }
 }
